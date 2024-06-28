@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: recipe-management
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: recipe-management
+      MYSQL_DATABASE: recipe-management
+      MYSQL_USER: recipe-management
+      MYSQL_PASSWORD: recipe-management
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - db-network
+    ports:
+      - 3306:3306
+
+volumes:
+  data:
+    driver: local
+    name: recipe-management
+
+networks:
+  db-network:
+    driver: bridge
+    name: recipe-management
