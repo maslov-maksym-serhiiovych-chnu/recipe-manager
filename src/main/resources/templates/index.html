@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>recipe-manager</title>
@@ -19,34 +19,27 @@
 </div>
 <div class="flex flex-col grow">
     <div class="flex items-center p-4 h-16 border-b border-slate-700">
-        <form class="flex items-center grow mr-2 p-2 space-x-2" action="">
-            <img src="/svg/search.svg" alt="search">
-            <label class="grow">
-                <input class="w-full bg-slate-900 text-sm focus:outline-none" type="search" name=""
-                       id=""
-                       placeholder="Search...">
-            </label>
-        </form>
-        <a class="flex items-center p-2 bg-sky-500 rounded-md text-sm text-white hover:bg-sky-400" href="/">
+        <a class="flex items-center p-2 bg-sky-500 rounded-md text-sm text-white hover:bg-sky-400" href="/create">
             <img class="mr-2" src="/svg/new.svg" alt="new">
             New
         </a>
     </div>
     <div class="grow overflow-y-auto m-5 p-5 space-y-5 border border-slate-700 rounded-xl">
-        <div class="border border-slate-700 rounded-md">
+        <div class="border border-slate-700 rounded-md" th:each="recipe : ${recipes}" th:object="${recipe}">
             <div class="flex items-center p-5 border-b border-slate-700">
-                <p class="grow font-bold"></p>
+                <p class="grow font-bold" th:text="*{title}"></p>
                 <a class="flex items-center mr-5 p-2 bg-sky-500 rounded-md text-sm text-white hover:bg-sky-400"
-                   href="/">
+                   th:href="@{/update/{id}(id=*{id})}">
                     <img class="mr-2" src="/svg/edit.svg" alt="edit">
                     Edit
                 </a>
-                <a class="flex items-center p-2 bg-sky-500 rounded-md text-sm text-white hover:bg-sky-400" href="/">
+                <a class="flex items-center p-2 bg-sky-500 rounded-md text-sm text-white hover:bg-sky-400"
+                   th:href="@{/delete/{id}(id=*{id})}">
                     <img class="mr-2" src="/svg/delete.svg" alt="delete">
                     Delete
                 </a>
             </div>
-            <p class="p-5"></p>
+            <p class="p-5" th:text="*{description}"></p>
         </div>
     </div>
 </div>
